@@ -1,0 +1,22 @@
+{ "name": "NodeNeo4jTemplate"
+  , "description": "The judges entry !"
+  , "version": "0.0.1"
+  , "author": "Aidan Casey & Pavan Kumar"
+  , "private": true
+  , "dependencies":
+    { "express": "~2.5.8"
+    , "jade": "~0.26.1"
+    , "neo4j": "~0.2.12"
+    , "stylus": "~0.27.1"
+  }
+  , "devDependencies":
+    { "node-dev": "~0.2.3"
+  }
+  , "engines":
+    { "node": "0.6.x"
+    , "npm": "1.1.x"
+  }
+  , "scripts":
+    { "start": "node-dev app.js"
+  }
+}
