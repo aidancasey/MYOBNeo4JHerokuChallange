@@ -1,8 +1,10 @@
-MYOB AD Coding competition  - Aidan & Pavan
+MYOB AD Coding competition  - Aidan & Pavan & Simon
 
 This is the judges solution to the MYOB AD Coding competition
 
 you can't judge the competition unless you understand the pain that went into building an entry :)
+
+we should get thsi solution to a point where we can upload, import and search the data in Neo..
 
 Its an 8 week challange for the developers at MYOB to wrap their heads around 
 Neo4J, Heroku and node.js
@@ -21,7 +23,7 @@ Next step is to strip it back and start to implement the real solution
 TO DO LIST
 **********
 
-O Figure out a first data model nodes and relationships on whiteboard
+O Figure out a first data model nodes and relationships on whiteboard 
 
 O Translate  model to Neo4J
 
@@ -32,8 +34,6 @@ O csv file processing using neo
 O Batch import APIs
 
 O document search APIs
-
-
 
 
 To deploy to Heroku...
