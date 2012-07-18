@@ -41,7 +41,7 @@ app.get('/', function (req, res) {
 
 app.get('/admin/deleteAllNodes', routes.admin.deleteAll);
 app.get('/import/batchImport', routes.import.importFiles);
-
+app.get('/import/createIndividual', routes.import.createIndividual);
 
 
 /*app.get('/users', routes.users.list);
