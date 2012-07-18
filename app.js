@@ -3,7 +3,7 @@
  */
 
 var express = require('express')  ;
-  //  , routes = require('./routes');
+var  routes = require('./routes');
 
 var app = module.exports = express.createServer();
 
@@ -15,7 +15,7 @@ app.configure(function(){
     app.use(express.bodyParser());
     app.use(express.methodOverride());
     app.use(require('stylus').middleware({ src: __dirname + '/public' }));
-   // app.use(app.router);
+    app.use(app.router);
     app.use(express.static(__dirname + '/public'));
 });
 
@@ -33,12 +33,13 @@ app.helpers({
 
 // Routes
 
-
+//default page
 app.get('/', function (req, res) {
     console.log("reguest for / came in");
     res.sendfile(__dirname + '/views/index.html');
 });
 
+app.get('/admin/deleteAllNodes', routes.admin.deleteAll);
 
 /*app.get('/users', routes.users.list);
 app.post('/users', routes.users.create);
