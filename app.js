@@ -40,6 +40,9 @@ app.get('/', function (req, res) {
 });
 
 app.get('/admin/deleteAllNodes', routes.admin.deleteAll);
+app.get('/import/batchImport', routes.import.importFiles);
+
+
 
 /*app.get('/users', routes.users.list);
 app.post('/users', routes.users.create);
