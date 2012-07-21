@@ -6,7 +6,7 @@ function deleteAllNodes(callback){
     db.query(cypherQuery, null, function (err, results) {
             if (err) {
                 return callback(err);}
-
+        callback(null);
         }
     )
 }
