@@ -1,6 +1,14 @@
-
+var db = require('../models/admin');
 
 exports.deleteAll = function(req, res){
-    console.log("to do delete everything from the db except node 0");
+    db.deleteAllNodes(
+                    function (err, result) {
+                        if (err) return err;
+
+                        console.log("all nodes deleted...")
+                        
+                        res.write('all good');
+                    }
+                      );
     res.end();
 };
