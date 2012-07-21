@@ -1,14 +1,18 @@
 var db = require('../models/admin');
 
-exports.deleteAll = function(req, res){
-    db.deleteAllNodes(
-                    function (err, result) {
-                        if (err) return err;
+exports.deleteAll = function(req, res,next){
+                       console.log("reguest for deleteAllNodes");
+                        db.deleteAllNodes(function (err, result) {
+                                            if (err){
+                                                console.log("in error handler");
 
-                        console.log("all nodes deleted...")
+                                                return next(err);
 
-                        res.write('all good');
-                    }
-                      );
-    res.end();
+                                            }
+                                            console.log("created");
+                                            res.end('done');
+                            }
+                                           );
 };
+
+

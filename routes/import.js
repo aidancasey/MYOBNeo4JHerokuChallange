@@ -16,8 +16,9 @@ exports.createIndividual = function (req, res, next) {
         dob :'1995-11-14', tfn : 67804455 };
 
     Individual.create(data
-        , function (err, user) {
+        , function (err, individual) {
         if (err) return next(err);
         console.log("created");
+        res.end('done');
     });
 };
