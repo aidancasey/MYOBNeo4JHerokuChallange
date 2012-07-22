@@ -1,16 +1,9 @@
-                                   _______                  _____      ____.
-                                   \      \   ____  ____   /  |  |    |    |
-                                   /   |   \_/ __ \/  _ \ /   |  |_   |    |
-                                  /    |    \  ___(  <_> )    ^   /\__|    |
-                                  \____|__  /\___  >____/\____   |\________|
-                                          \/     \/           |__|
-  ___ ___                       __           _________ .__           .__  .__
- /   |   \   ___________  ____ |  | ____ __  \_   ___ \|  |__ _____  |  | |  |   ____   ____    ____   ____
-/    ~    \_/ __ \_  __ \/  _ \|  |/ /  |  \ /    \  \/|  |  \\__  \ |  | |  | _/ __ \ /    \  / ___\_/ __ \
-\    Y    /\  ___/|  | \(  <_> )    <|  |  / \     \___|   Y  \/ __ \|  |_|  |_\  ___/|   |  \/ /_/  >  ___/
- \___|_  /  \___  >__|   \____/|__|_ \____/   \______  /___|  (____  /____/____/\___  >___|  /\___  / \___  >
-       \/       \/                  \/               \/     \/     \/               \/     \//_____/      \/
-
+ _______             .___        _______                  _____      ____. _________ .__           .__  .__
+ \      \   ____   __| _/____    \      \   ____  ____   /  |  |    |    | \_   ___ \|  |__ _____  |  | |  |   ____   ____    ____   ____
+ /   |   \ /  _ \ / __ |/ __ \   /   |   \_/ __ \/  _ \ /   |  |_   |    | /    \  \/|  |  \\__  \ |  | |  | _/ __ \ /    \  / ___\_/ __ \
+/    |    (  <_> ) /_/ \  ___/  /    |    \  ___(  <_> )    ^   /\__|    | \     \___|   Y  \/ __ \|  |_|  |_\  ___/|   |  \/ /_/  >  ___/
+\____|__  /\____/\____ |\___  > \____|__  /\___  >____/\____   |\________|  \______  /___|  (____  /____/____/\___  >___|  /\___  / \___  >
+        \/            \/    \/          \/     \/           |__|                   \/     \/     \/               \/     \//_____/      \/
 
  Aidan & Pavan & Simon
 
@@ -37,14 +30,23 @@ TO DO LIST
 **********
 
 O Figure out a first data model nodes and relationships on whiteboard
+
 O Translate  model to Neo4J
+
 X Create basic structure
+
 X Neo4J integration
+
 X csv file processing using neo
+
 O parse each csv -> to JSON -> to Neo4J
+
 O Clean RESTful API's for all service calls
+
 O Twitter integration to identify influential clients
+
 O Feed in Share prices to determine wealthiest clients
+
 O Cypher queries to bring back all the data!!
 
 How to deploy to Heroku...
