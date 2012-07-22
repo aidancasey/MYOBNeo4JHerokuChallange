@@ -2,22 +2,26 @@ var Individual = require('../models/Individual');
 var csvMapper = require('../models/csvMapper');
 
 
-exports.importFiles = function(req, res){
+exports.importFiles = function(req, res, next){
 //TO make this all async
-    csvMapper.parseFile();
-    res.end('done');
+    csvMapper.parseFile( function (err, individuals) {
+            if (err) return next(err);
+            console.log('number of individuals ' +  individuals.length);
+            individuals.forEach(function(item){
+                        addIndividual(req,res,next,item);
+                                })
+
+            res.end('done');
+                        }
+            );
 
 };
 
-
-exports.createIndividual = function (req, res, next) {
-
-    var data = {Id : 1, title : 'Mr', firstname :'Angie', lastname : 'Fuller', sex: 'F',
-        dob :'1995-11-14', tfn : 67804455 };
+function addIndividual(req, res, next, data) {
     Individual.create(data
         , function (err, individual) {
-        if (err) return next(err);
-        console.log("created");
-        res.end('done');
-    });
-};
+            if (err) return next(err);
+            console.log("individaul added to db");
+            res.end('done');
+        });
+}

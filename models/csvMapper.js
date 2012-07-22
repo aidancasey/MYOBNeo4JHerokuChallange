@@ -1,22 +1,34 @@
 var csv = require('csv');
 
-function parseFile()
+function parseFile(callback)
 {
-
-var rawdata = [];
+var  individuals= [];
 
 csv()
-    .fromPath(__dirname + '../../csv_data/Individual.csv')
-    //.toStream(process.stdout)
-    .transform(function(data,index){
-
-        rawdata.push(data[0]);
-      //  return (index>0 ? ',' : '') + data[0] + ":" + data[2] + ' ' + data[1];
+    .fromPath(__dirname+ '../../csv_data/individual.csv',{
+        columns: true
+    })
+    .on('data',function(data,index){
+        var item ={ id : data.Id,
+                    ManagedBy : data.ManagedBy,
+                    Title : data.Title,
+                    FirstName : data.FirstName,
+                    LastName : data.LastName,
+                    Gender : data.Gender,
+                    DOB : data.DOB,
+                    TFN : data.TFN,
+                    Mobile : data.Mobile,
+                    Email : data.Email,
+                    Twitter : data.Twitter,
+                    AddressLine1 : data.AddressLine1,
+                    ReferralId : data.ReferralId
+                  }
+        individuals.push(item);
+      // console.log(JSON.stringify(item) );
     })
     .on('end',function(count){
         console.log('Number of lines: '+count );
-        console.log('Number of items in array: '+rawdata.length );
+        return callback(null,individuals);
     })
 }
-
 exports.parseFile = parseFile;
