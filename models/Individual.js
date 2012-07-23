@@ -1,6 +1,7 @@
-
+var csv = require('csv');
 var neo4j = require('neo4j');
 var db = new neo4j.GraphDatabase(process.env.NEO4J_URL || 'http://localhost:7474');
+
 
 var INDEX_NAME = 'individuals';
 var INDEX_KEY = 'key';
@@ -10,11 +11,54 @@ var Individual = module.exports = function User(_node) {
     this._node = _node;
 }
 
+Individual.LoadFromFile = function(callback)
+{
+    csv().fromPath(__dirname+ '../../csv_data/individual.csv', { columns: true, trim: true })
+        .on('data', loadIndividual)
+        .on('end', handleSuccess)
+        .on('error', handleLoadError);
+}
+
+function loadIndividual(data, index) {
+    var item ={ id : data.Id,
+        ManagedBy : data.ManagedBy,
+        Title : data.Title,
+        FirstName : data.FirstName,
+        LastName : data.LastName,
+        Gender : data.Gender,
+        DOB : data.DOB,
+        TFN : data.TFN,
+        Mobile : data.Mobile,
+        Email : data.Email,
+        Twitter : data.Twitter,
+        AddressLine1 : data.AddressLine1,
+        AddressLine2 : data.AddressLine2,
+        Postcode : data.Postcode,
+        City : data.City,
+        State : data.State,
+        ReferralId : data.ReferralId
+        }
+    removeNullOrEmptyPropertiesIn(item);
+    Individual.create(item, handleCreated);
+}
+
+function handleSuccess(count) {
+    console.log('Number of individuals created: ' + count);
+}
+
+function handleLoadError(error) {
+    console.log(error.message);
+}
+
+function handleCreated(error, data) {
+    if (error) console.log(error.message);
+    console.log('Created: ' + data);
+}
+
+
 // creates the user and persists (saves) it to the db, incl. indexing it:
 Individual.create = function (data, callback) {
-
-    // Neo4J doesn't support null values - remove any properties with nulls
-    removeNullOrEmptyPropertiesIn(data);
+console.log('calling Neo4J....')
     var node = db.createNode(data);
     var individual = new Individual(node);
     node.save(function (err) {
@@ -25,7 +69,6 @@ Individual.create = function (data, callback) {
         });
     });
 };
-
 
 function isNullOrEmpty(value) {
     return !value || value.length === 0 || /^\s*$/.test(value);
