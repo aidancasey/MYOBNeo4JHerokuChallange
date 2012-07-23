@@ -12,6 +12,9 @@ var Individual = module.exports = function User(_node) {
 
 // creates the user and persists (saves) it to the db, incl. indexing it:
 Individual.create = function (data, callback) {
+
+    // Neo4J doesn't support null values - remove any properties with nulls
+    removeNullOrEmptyPropertiesIn(data);
     var node = db.createNode(data);
     var individual = new Individual(node);
     node.save(function (err) {
@@ -23,6 +26,16 @@ Individual.create = function (data, callback) {
     });
 };
 
+
+function isNullOrEmpty(value) {
+    return !value || value.length === 0 || /^\s*$/.test(value);
+}
+function removeNullOrEmptyPropertiesIn(object)
+{  for (var propertyName in object)
+{    var propertyValue = object[propertyName];
+    if (isNullOrEmpty(propertyValue))
+        delete object[propertyName];
+}}
 
 //CYPHER QUERY TO CREATE NODE
 //Individual
