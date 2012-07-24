@@ -2,5 +2,5 @@
 //CYPHER QUERY TO SEARCH THE INDEX
 
 
-START n=node:individuals(type = "user")
-RETURN n
+START n=node:employees(key = "employee")
+RETURN

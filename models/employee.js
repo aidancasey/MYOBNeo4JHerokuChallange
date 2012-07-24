@@ -35,8 +35,11 @@ function loadEmployee(data, index) {
             State : data.State,
             Income : data.Income
         }
+
+    console.log(data);
     removeNullOrEmptyPropertiesIn(item);
-    Individual.create(item, handleCreated);
+    console.log(JSON.stringify(item));
+    Employee.create(item, handleCreated);
 }
 
 function handleSuccess(count) {
