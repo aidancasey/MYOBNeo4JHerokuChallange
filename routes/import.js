@@ -1,31 +1,13 @@
 var individuals = require('../models/Individual');
-//var csvMapper = require('../models/csvMapper');
+var employees = require('../models/Employee');
+
 
 exports.importFiles = function(req, res, next){
     individuals.LoadFromFile();
-      //  if (err) return next(err);
-    console.log("individaul added to db");
+    console.log("individuals added to db");
 
-
-
-//    csvMapper.parseFile( function (err, individuals) {
-//            if (err) return next(err);
-//            console.log('number of individuals ' +  individuals.length);
-//            individuals.forEach(function(item){
-//                        addIndividual(req,res,next,item);
-//                                })
-//
-            res.end('done');
-//                        }
-//            );
-
+    employees.LoadFromFile();
+    console.log("employees added db");
+    res.end('done');
 };
 
-//function addIndividual(req, res, next, data) {
-//    Individual.create(data
-//        , function (err, individual) {
-//            if (err) return next(err);
-//            console.log("individaul added to db");
-//            res.end('done');
-//        });
-//}
