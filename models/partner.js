@@ -11,6 +11,7 @@ var INDEX_VAL = 'partner';
 var Partner = module.exports = function Partner(_node) {
     this._node = _node;
 }
+
 util.createProxyProperties(Partner,["Id","Title","FirstName","LastName","DOB","Mobile","Email",
     "Twitter","Notes","AddressLine1","AddressLine2","Postcode","City","State","Income","Type"]);
 
@@ -23,6 +24,12 @@ Partner.LoadFromFile = function () {
 
 function loadData(data, index) {
     var partner = data;
+
+    var p = new Partner();
+    p.FirstName = data.FirstName;
+    p.Id = data.Id;
+    p.LastName = data.LastName;
+
     util.removeNullOrEmptyPropertiesIn(partner);
     console.log(JSON.stringify(partner));
     Partner.create(partner, handleCreated);

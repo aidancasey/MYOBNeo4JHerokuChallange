@@ -1,6 +1,7 @@
 var csv = require('csv');
 var neo4j = require('neo4j');
 var util = require('../common/utils');
+var uscore = require("underscore");
 
 var db = new neo4j.GraphDatabase(util.ConnectionString());
 
@@ -12,6 +13,12 @@ var Individual = module.exports = function User(_node) {
     this._node = _node;
 }
 
+var propertyNames = ["Id","ManagedBy","Title","FirstName","LastName",
+    "Gender","DOB","TFN","Mobile","Email","Twitter","Notes","AddressLine1","AddressLine2",
+    "Postcode","City","State","ReferralId"];
+
+util.createProxyProperties(Individual,propertyNames);
+
 Individual.LoadFromFile = function()
 {
     csv().fromPath(__dirname+ '../../csv_data/individual.csv', { columns: true, trim: true })
@@ -21,28 +28,13 @@ Individual.LoadFromFile = function()
 }
 
 function loadIndividual(data, index) {
-    var item ={ id : data.Id,
-        ManagedBy : data.ManagedBy,
-        Title : data.Title,
-        FirstName : data.FirstName,
-        LastName : data.LastName,
-        Gender : data.Gender,
-        DOB : data.DOB,
-        TFN : data.TFN,
-        Mobile : data.Mobile,
-        Email : data.Email,
-        Twitter : data.Twitter,
-        AddressLine1 : data.AddressLine1,
-        AddressLine2 : data.AddressLine2,
-        Postcode : data.Postcode,
-        City : data.City,
-        State : data.State,
-        ReferralId : data.ReferralId
-        }
-    util.removeNullOrEmptyPropertiesIn(item);
-    Individual.create(item, handleCreated);
-}
 
+    //pick out the properties of interest from each line
+    var individual = uscore.pick(data, propertyNames);
+
+    util.removeNullOrEmptyPropertiesIn(individual);
+    Individual.create(individual, handleCreated);
+}
 function handleSuccess(count) {
     console.log('Number of individuals created: ' + count);
 }
@@ -55,7 +47,6 @@ function handleCreated(error, data) {
     if (error) console.log(error.message);
     console.log('Created: ' + data);
 }
-
 
 // creates the user and persists (saves) it to the db, incl. indexing it:
 Individual.create = function (data, callback) {
@@ -70,7 +61,3 @@ console.log('calling Neo4J....')
         });
     });
 };
-
-
-
-
