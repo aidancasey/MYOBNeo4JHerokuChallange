@@ -4,3 +4,6 @@
 
 START n=node:employees(key = "employee")
 RETURN
+
+START n=node:partners(key = "partner")
+RETURN
