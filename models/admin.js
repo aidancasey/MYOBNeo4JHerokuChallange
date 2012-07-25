@@ -1,5 +1,7 @@
 var neo4j = require('neo4j');
-var db = new neo4j.GraphDatabase(process.env.NEO4J_URL || 'http://localhost:7474');
+var util = require('../common/utils');
+
+var db = new neo4j.GraphDatabase(util.ConnectionString());
 
 function deleteAllNodes(callback){
     var cypherQuery = "START n=node(*) MATCH n-[r?]-() WHERE ID(n) <> 0 DELETE n,r";

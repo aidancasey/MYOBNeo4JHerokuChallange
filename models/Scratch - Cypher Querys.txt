@@ -1,9 +1,8 @@
 
 //CYPHER QUERY TO SEARCH THE INDEX
 
-
 START n=node:employees(key = "employee")
-RETURN
+RETURN n
 
 START n=node:partners(key = "partner")
-RETURN
+ n

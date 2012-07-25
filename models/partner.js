@@ -1,6 +1,8 @@
 var csv = require('csv');
 var neo4j = require('neo4j');
-var db = new neo4j.GraphDatabase(process.env.NEO4J_URL || 'http://localhost:7474');
+var util = require('../common/utils');
+
+var db = new neo4j.GraphDatabase(util.ConnectionString());
 
 var INDEX_NAME = 'partners';
 var INDEX_KEY = 'key';
@@ -38,7 +40,7 @@ function loadData(data, index) {
         }
 
     console.log(data);
-    removeNullOrEmptyPropertiesIn(item);
+    util.removeNullOrEmptyPropertiesIn(item);
     console.log(JSON.stringify(item));
     Partner.create(item, handleCreated);
 }
@@ -69,17 +71,5 @@ Partner.create = function (data, callback) {
         });
     });
 };
-
-function isNullOrEmpty(value) {
-    return !value || value.length === 0 || /^\s*$/.test(value);
-}
-function removeNullOrEmptyPropertiesIn(object)
-{  for (var propertyName in object)
-{    var propertyValue = object[propertyName];
-    if (isNullOrEmpty(propertyValue))
-        delete object[propertyName];
-}}
-
-
 
 
