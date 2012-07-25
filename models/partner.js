@@ -1,6 +1,7 @@
 var csv = require('csv');
 var neo4j = require('neo4j');
 var util = require('../common/utils');
+var uscore = require("underscore");
 
 var db = new neo4j.GraphDatabase(util.ConnectionString());
 
@@ -12,8 +13,8 @@ var Partner = module.exports = function Partner(_node) {
     this._node = _node;
 }
 
-util.createProxyProperties(Partner,["Id","Title","FirstName","LastName","DOB","Mobile","Email",
-    "Twitter","Notes","AddressLine1","AddressLine2","Postcode","City","State","Income","Type"]);
+var propertyNames = ["Id","Title","FirstName","LastName","DOB","Mobile","Email",
+    "Twitter","AddressLine1","AddressLine2","Postcode","City","State","Income","Type"];
 
 Partner.LoadFromFile = function () {
     csv().fromPath(__dirname + '../../csv_data/partner.csv', {
@@ -23,15 +24,10 @@ Partner.LoadFromFile = function () {
 }
 
 function loadData(data, index) {
-    var partner = data;
-
-    var p = new Partner();
-    p.FirstName = data.FirstName;
-    p.Id = data.Id;
-    p.LastName = data.LastName;
+    //pick out the properties of interest from each line
+    var partner = uscore.pick(data, propertyNames);
 
     util.removeNullOrEmptyPropertiesIn(partner);
-    console.log(JSON.stringify(partner));
     Partner.create(partner, handleCreated);
 }
 

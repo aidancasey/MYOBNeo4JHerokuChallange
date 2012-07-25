@@ -1,8 +1,14 @@
 
 //CYPHER QUERY TO SEARCH THE INDEX
 
+START n=node:individuals(key = "individual")
+RETURN n
+
 START n=node:employees(key = "employee")
 RETURN n
 
 START n=node:partners(key = "partner")
+RETURN n
+
+START n=node:businesses(key = "business")
 RETURN n
