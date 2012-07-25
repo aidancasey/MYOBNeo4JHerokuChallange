@@ -11,38 +11,21 @@ var INDEX_VAL = 'partner';
 var Partner = module.exports = function Partner(_node) {
     this._node = _node;
 }
+util.createProxyProperties(Partner,["Id","Title","FirstName","LastName","DOB","Mobile","Email",
+    "Twitter","Notes","AddressLine1","AddressLine2","Postcode","City","State","Income","Type"]);
 
-Partner.LoadFromFile = function()
-{
-    csv().fromPath(__dirname+ '../../csv_data/partner.csv', { columns: true, trim: true })
-        .on('data', loadData)
-        .on('end', handleSuccess)
-        .on('error', handleLoadError);
+Partner.LoadFromFile = function () {
+    csv().fromPath(__dirname + '../../csv_data/partner.csv', {
+        columns: true,
+        trim: true
+    }).on('data', loadData).on('end', handleSuccess).on('error', handleLoadError);
 }
 
 function loadData(data, index) {
-    var item ={ id : data.Id,
-
-        Title : data.Title,
-        FirstName : data.FirstName,
-        LastName : data.LastName,
-        DOB : data.DOB,
-        Mobile : data.Mobile,
-        Email : data.Email,
-        Twitter : data.Twitter,
-        AddressLine1 : data.AddressLine1,
-        AddressLine2 : data.AddressLine2,
-        Postcode : data.Postcode,
-        City : data.City,
-        State : data.State,
-        Income : data.Income,
-        Type : data.Type
-        }
-
-    console.log(data);
-    util.removeNullOrEmptyPropertiesIn(item);
-    console.log(JSON.stringify(item));
-    Partner.create(item, handleCreated);
+    var partner = data;
+    util.removeNullOrEmptyPropertiesIn(partner);
+    console.log(JSON.stringify(partner));
+    Partner.create(partner, handleCreated);
 }
 
 function handleSuccess(count) {
@@ -72,4 +55,14 @@ Partner.create = function (data, callback) {
     });
 };
 
+Partner.getAll = function (callback) {
+    db.getIndexedNodes(INDEX_NAME, INDEX_KEY, INDEX_VAL, function (err, nodes) {
+        if (err) return callback(err);
 
+        var partners = nodes.map(function (node) {
+            return new Partner(node);
+        });
+
+        callback(null, partners);
+    });
+};

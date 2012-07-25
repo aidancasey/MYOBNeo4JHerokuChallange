@@ -5,4 +5,4 @@ START n=node:employees(key = "employee")
 RETURN n
 
 START n=node:partners(key = "partner")
- n
+RETURN n
