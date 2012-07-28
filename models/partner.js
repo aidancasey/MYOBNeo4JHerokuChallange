@@ -17,7 +17,7 @@ var propertyNames = ["Id","Title","FirstName","LastName","DOB","Mobile","Email",
     "Twitter","AddressLine1","AddressLine2","Postcode","City","State","Income","Type"];
 
 Partner.LoadFromFile = function () {
-    csv().fromPath(__dirname + '../../csv_data/partner.csv', {
+    csv().fromPath('csv_data/partner.csv', {
         columns: true,
         trim: true
     }).on('data', loadData).on('end', handleSuccess).on('error', handleLoadError);

@@ -21,7 +21,7 @@ util.createProxyProperties(Individual,propertyNames);
 
 Individual.LoadFromFile = function()
 {
-    csv().fromPath(__dirname+ '../../csv_data/individual.csv', { columns: true, trim: true })
+    csv().fromPath('csv_data/individual.csv', { columns: true, trim: true })
         .on('data', loadIndividual)
         .on('end', handleSuccess)
         .on('error', handleLoadError);
