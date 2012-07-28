@@ -1,4 +1,4 @@
-//var individuals = require('../models/individual');
+var individuals = require('../models/individual');
 var employees = require('../models/employee');
 var partners = require('../models/partner');
 var businesses = require('../models/business');
