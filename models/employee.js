@@ -19,7 +19,7 @@ util.createProxyProperties(Employee,propertyNames);
 
 Employee.LoadFromFile = function()
 {
-    csv().fromPath('csv_data/employee.csv', { columns: true, trim: true })
+    csv().fromPath('csv_data/Employee.csv', { columns: true, trim: true })
         .on('data', loadData)
         .on('end', handleSuccess)
         .on('error', handleLoadError);
