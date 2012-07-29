@@ -16,6 +16,14 @@ var Partner = module.exports = function Partner(_node) {
 var propertyNames = ["Id","Title","FirstName","LastName","DOB","Mobile","Email",
     "Twitter","AddressLine1","AddressLine2","Postcode","City","State","Income","Type"];
 
+Partner.prototype.manages = function (individual, callback) {
+    this._node.createRelationshipTo(individual._node, 'manages', {}, function (err, rel) {
+        callback(err);
+    });
+};
+
+
+
 Partner.LoadFromFile = function () {
     csv().fromPath('csv_data/Partner.csv', {
         columns: true,

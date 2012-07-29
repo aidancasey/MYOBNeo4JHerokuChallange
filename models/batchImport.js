@@ -3,7 +3,7 @@ var employees = require('../models/employee');
 var partners = require('../models/partner');
 var businesses = require('../models/business');
 
-function ImportData(){
+function ImportData() {
 
     //add nodes
 
@@ -21,34 +21,49 @@ function ImportData(){
 }
 
 
-function AddRelationships(){
+function AddRelationships() {
 
     //TO DO is there a way to check if Neo4J has caught up ?? I guess I could double check the
     // node count to the line count in the csv files///
-
-    //add relationship between nodes
-
-    // the tricky bit here is that the calls to Neo are async ... how do we know all the data has been populated??
-
-
 
     //add "manages" relationship (partner) -[manages]-> (individual)
 
     //get all partner nodes
     var partnernodes;
     partners.getAll(
-                                    function (err, result) {
-                                        if (err){
-                                            return err;
-                                        }
-                                        partnernodes = result;
-                                        console.log('number partners returned is '+ partners.length);
-                                    }
-    );
+
+        function (err, result) {
+            if (err) {
+                return err;
+            }
+            partnernodes = result;
+            console.log('number partners returned is ' + partnernodes.length);
+        });
+    var individualnodes;
+    individuals.getAll(
+
+        function (err, result) {
+            if (err) {
+                return err;
+            }
+            individualnodes = result;
+            console.log('number individuals returned is ' + individualnodes.length);
+
+//loop thru all individuals, find the partner and add the manages relationship
+
+            individualnodes.forEach(
+                function(ind)
+                {
+//                    var partnerid = ind._node.ManagedBy;
+  //                  console.log('managed by' + partnerid);
+                }
+            )
+
+
+        });
 
 
 }
-
 
 exports.AddRelationships = AddRelationships;
 exports.ImportData = ImportData;
