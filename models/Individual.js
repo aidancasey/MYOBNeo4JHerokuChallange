@@ -48,7 +48,7 @@ function handleCreated(error, data) {
     console.log('Created: ' + data);
 }
 
-// creates the user and persists (saves) it to the db, incl. indexing it:
+// create the node and persists (saves) it to the db, incl. indexing it:
 Individual.create = function (data, callback) {
 console.log('calling Neo4J....')
     var node = db.createNode(data);
@@ -59,5 +59,15 @@ console.log('calling Neo4J....')
             if (err) return callback(err);
             callback(null, individual);
         });
+    });
+};
+
+Individual.getAll = function (callback) {
+    db.getIndexedNodes(INDEX_NAME, INDEX_KEY, INDEX_VAL, function (err, nodes) {
+        if (err) return callback(null, []);
+        var individuals = nodes.map(function (node) {
+            return new Individual(node);
+        });
+        callback(null, individuals);
     });
 };
