@@ -9,7 +9,7 @@ var INDEX_NAME = 'individuals';
 var INDEX_KEY = 'key';
 var INDEX_VAL = 'individual';
 
-var Individual = module.exports = function User(_node) {
+var Individual = module.exports = function Individual(_node) {
     this._node = _node;
 }
 

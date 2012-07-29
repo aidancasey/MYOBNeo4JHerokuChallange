@@ -1,0 +1,23 @@
+
+1. download and install safari browser (its the only one that the debugger runs in for me)
+
+2. open windows explorer and go to the folder with your code (assuming your start file is called server.js)
+
+3. run this command
+
+npm install -g node-inspector
+
+
+4. open new cmd window and run
+node --debug server.js
+
+5. open aonther cmd windows and run
+node-inspector you'll see a message that node inspector is running...
+
+
+6. in safari browse to the debugger by going to http://localhost:8080/debug?port=5858, set a breakpoint
+
+7. in chrome open your page = e.g. localhost:8000
+
+
+8. back to safari and you are debugging !!
