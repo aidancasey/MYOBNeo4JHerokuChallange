@@ -1,5 +1,5 @@
-// user.js
-// User model logic.
+// Stock.js
+// Stock model logic.
 
 var neo4j = require('neo4j');
 var db = new neo4j.GraphDatabase(process.env.NEO4J_URL || 'http://localhost:7474');
@@ -59,12 +59,6 @@ Stock.prototype.save = function (callback) {
 
 Stock.prototype.del = function (callback) {
     this._node.del(function (err) { callback(err); }, true);   // true = yes, force it (delete all relationships)
-};
-
-Stock.prototype.follow = function (other, callback) {
-    this._node.createRelationshipTo(other._node, 'follows', {}, function (err, rel) {
-        callback(err);
-    });
 };
 
 // public functions:
