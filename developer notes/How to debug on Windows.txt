@@ -9,13 +9,17 @@ npm install -g node-inspector
 
 
 4. open new cmd window and run
-node --debug server.js
+node --debug app.js
 
-5. open aonther cmd windows and run
-node-inspector you'll see a message that node inspector is running...
+5. open another cmd windows and run
+node-inspector
+
+ you'll see a message that node inspector is running...
 
 
-6. in safari browse to the debugger by going to http://localhost:8080/debug?port=5858, set a breakpoint
+6. in safari browse to the debugger by going to
+http://localhost:8080/debug?port=5858
+, set a breakpoint
 
 7. in chrome open your page = e.g. localhost:8000
 

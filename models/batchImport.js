@@ -54,8 +54,10 @@ function AddRelationships() {
             individualnodes.forEach(
                 function(ind)
                 {
-//                    var partnerid = ind._node.ManagedBy;
-  //                  console.log('managed by' + partnerid);
+                    //ok here how to access the properties but its dog ugly !
+                    //maybe adding prototyping properties would be nice..
+                    var partnerid = ind._node._data.data.ManagedBy;
+                    console.log('managed by :' + partnerid);
                 }
             )
 
